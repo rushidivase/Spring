@@ -21,42 +21,59 @@
 
 	<div class="container mt-5 border shadow p-5">
 		<div class="row justify-content-center">
-			<div class="col-8 ">
+			<div class="col-10 ">
 
 				<h2 class="display-6 text-center mb-4">Student Data</h2>
-				<table class="table table-bordered table-striped table-hover border shadow">
-					<thead class="table-dark">
-						<tr>
-							<th>Student ID</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Mobile No</th>
-							<th>Qualification</th>
-							<th>City</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							for (Student stu : sList) {
-						%>
-						<tr>
-							<td><%=stu.getSid()%></td>
-							<td><%=stu.getName()%></td>
-							<td><%=stu.getEmail()%></td>
-							<td><%=stu.getMono()%></td>
-							<td><%=stu.getQualification()%></td>
-							<td><%=stu.getCity()%></td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
-				<a href="register" class="btn btn-dark w-100 mb-2 mt-3">Register New Student</a>
+				<form name="myForm">
+					<table
+						class="table table-bordered table-striped table-hover border shadow">
+						<thead class="table-dark">
+							<tr>
+								<th>Select</th>
+								<th>Student ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Mobile No</th>
+								<th>Qualification</th>
+								<th>City</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								for (Student stu : sList) {
+							%>
+							<tr>
+								<td><input type="radio" name="sid"
+									value="<%=stu.getSid()%>"></td>
+								<td><%=stu.getSid()%></td>
+								<td><%=stu.getName()%></td>
+								<td><%=stu.getEmail()%></td>
+								<td><%=stu.getMono()%></td>
+								<td><%=stu.getQualification()%></td>
+								<td><%=stu.getCity()%></td>
+
+							</tr>
+							<%
+								}
+							%>
+
+						</tbody>
+					</table>
+					<button type="submit" class="btn btn-danger" onclick="deleteStudent()">Delete</button>
+				</form>
+				<a href="register" class="btn btn-dark w-100 mb-2 mt-3">Register
+					New Student</a>
 			</div>
 		</div>
 	</div>
 
 
 </body>
+<script>
+	function deleteStudent() {
+		document.myForm.action = "delete-student";
+		document.myForm.submit();
+
+	}
+</script>
 </html>

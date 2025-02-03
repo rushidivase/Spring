@@ -54,4 +54,17 @@ public class HomeController {
 		service.saveStudent(stu);
 		return "register";
 	}
+	
+	@RequestMapping("/delete-student")
+	public String deleteStudent(@RequestParam int sid, Model model)
+	{
+		List<Student> sList = service.deleteById(sid);
+		
+		if (!sList.isEmpty()) {
+			model.addAttribute("data", sList);
+			return "success";
+		} else {
+			return "login";
+		}
+	}
 }

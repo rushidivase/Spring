@@ -10,4 +10,6 @@ public interface StudentDao {
 
 	List<Student> getAllStudent();
 
+	List<Student> deleteById(int sid);
+
 }

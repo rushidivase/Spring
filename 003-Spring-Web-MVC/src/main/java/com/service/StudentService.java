@@ -10,4 +10,6 @@ public interface StudentService {
 
 	List<Student> loginCheck(String username, String password);
 
+	List<Student> deleteById(int sid);
+
 }

@@ -30,4 +30,12 @@ public class StudentDaoIMPL implements StudentDao {
 		return q.getResultList();
 	}
 
+	public List<Student> deleteById(int sid) {
+		Session session = factory.openSession();
+		Student stu = session.get(Student.class, sid);
+		session.delete(stu);
+		session.beginTransaction().commit();
+		return getAllStudent();
+	}
+
 }

@@ -33,4 +33,10 @@ public class StudentServiceIMPL implements StudentService{
 			   return new ArrayList<Student>();
 		   }
 	}
+
+
+	public List<Student> deleteById(int sid) {
+	
+		return dao.deleteById(sid);
+	}
 }

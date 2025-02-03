@@ -38,4 +38,17 @@ public class StudentDaoIMPL implements StudentDao {
 		return getAllStudent();
 	}
 
+	public Student getStudentById(int sid) {
+		Session session = factory.openSession();
+		Student stu = session.get(Student.class, sid);
+		return stu;
+	}
+
+	public List<Student> updateStudent(Student stu) {
+		Session session = factory.openSession();
+		session.update(stu);
+		session.beginTransaction().commit();
+		return getAllStudent();
+	}
+
 }

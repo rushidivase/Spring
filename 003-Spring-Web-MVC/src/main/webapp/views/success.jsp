@@ -44,7 +44,7 @@
 							%>
 							<tr>
 								<td><input type="radio" name="sid"
-									value="<%=stu.getSid()%>"></td>
+									value="<%=stu.getSid()%>" required></td>
 								<td><%=stu.getSid()%></td>
 								<td><%=stu.getName()%></td>
 								<td><%=stu.getEmail()%></td>
@@ -60,9 +60,10 @@
 						</tbody>
 					</table>
 					<button type="submit" class="btn btn-danger" onclick="deleteStudent()">Delete</button>
+					<button type="submit" class="btn btn-success" onclick="updateStudent()">Update</button>
+					<button type="submit" class="btn btn-info" onclick="registerStudent()">Register Student</button>
 				</form>
-				<a href="register" class="btn btn-dark w-100 mb-2 mt-3">Register
-					New Student</a>
+			
 			</div>
 		</div>
 	</div>
@@ -70,10 +71,26 @@
 
 </body>
 <script>
+
+function registerStudent() {
+	alert("Register a new Student..!")
+	document.myForm.action = "register";
+	document.myForm.submit();
+
+}
+
 	function deleteStudent() {
+		alert("You are Deleting a Student..!");
 		document.myForm.action = "delete-student";
 		document.myForm.submit();
 
+	}
+	
+	function updateStudent()
+	{
+		alert("You are Updating a Student..!");
+		document.myForm.action = "getStudentById";
+		document.myForm.submit();
 	}
 </script>
 </html>

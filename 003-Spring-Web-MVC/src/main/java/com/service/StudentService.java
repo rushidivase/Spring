@@ -12,4 +12,8 @@ public interface StudentService {
 
 	List<Student> deleteById(int sid);
 
+	Student getStudentById(int sid);
+
+	List<Student> updateStudent(Student stu);
+
 }

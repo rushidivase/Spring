@@ -67,4 +67,26 @@ public class HomeController {
 			return "login";
 		}
 	}
+	
+	@RequestMapping("/getStudentById")
+	public String getStudentById(@RequestParam int sid, Model model)
+	{
+		Student stu = service.getStudentById(sid);
+		System.out.println("Student for update:"+stu);
+		model.addAttribute("data", stu);
+		return "update";
+	}
+	
+	@RequestMapping("/update-student")
+	public String updateStudent(@ModelAttribute Student stu, Model model)
+	{
+		System.out.println("Update STudent in controller"+stu);
+		List<Student> sList = service.updateStudent(stu);
+		if (!sList.isEmpty()) {
+			model.addAttribute("data", sList);
+			return "success";
+		} else {
+			return "login";
+		}
+	}
 }

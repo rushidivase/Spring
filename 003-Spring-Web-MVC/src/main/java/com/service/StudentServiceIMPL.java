@@ -39,4 +39,16 @@ public class StudentServiceIMPL implements StudentService{
 	
 		return dao.deleteById(sid);
 	}
+
+
+	public Student getStudentById(int sid) {
+		
+		return dao.getStudentById(sid);
+	}
+
+
+	public List<Student> updateStudent(Student stu) {
+		
+		return dao.updateStudent(stu);
+	}
 }

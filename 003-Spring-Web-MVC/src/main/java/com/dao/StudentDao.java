@@ -16,4 +16,6 @@ public interface StudentDao {
 
 	List<Student> updateStudent(Student stu);
 
+	List<Student> searchData(String record);
+
 }

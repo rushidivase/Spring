@@ -51,4 +51,14 @@ public class StudentServiceIMPL implements StudentService{
 		
 		return dao.updateStudent(stu);
 	}
+
+
+	public List<Student> searchData(String record) {
+		
+		return dao.searchData(record);
+	}
+
+
+	public List<Student> refreshPage() {
+		return dao.getAllStudent();	}
 }

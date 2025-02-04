@@ -89,4 +89,28 @@ public class HomeController {
 			return "login";
 		}
 	}
+	
+	@RequestMapping("/search-record")
+	public String searchStudent(@RequestParam String record, Model model)
+	{
+		List<Student> sList = service.searchData(record);
+		if (!sList.isEmpty()) {
+			model.addAttribute("data", sList);
+			return "success";
+		} else {
+			return "login";
+		}
+	}
+	
+	@RequestMapping("/refresh-page")
+	public String refreshPage(Model model)
+	{
+		List<Student> sList = service.refreshPage();
+		if (!sList.isEmpty()) {
+			model.addAttribute("data", sList);
+			return "success";
+		} else {
+			return "login";
+		}
+	}
 }

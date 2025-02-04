@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@include file="/views/navbar.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,7 @@
 </head>
 <body>
 
+
 	<%
 		List<Student> sList = (List<Student>) request.getAttribute("data");
 	%>
@@ -22,7 +24,6 @@
 	<div class="container mt-5 border shadow p-5">
 		<div class="row justify-content-center">
 			<div class="col-10 ">
-
 				<h2 class="display-6 text-center mb-4">Student Data</h2>
 				<form name="myForm">
 					<table
@@ -59,11 +60,11 @@
 
 						</tbody>
 					</table>
-					<button type="submit" class="btn btn-danger" onclick="deleteStudent()">Delete</button>
-					<button type="submit" class="btn btn-success" onclick="updateStudent()">Update</button>
-					<button type="submit" class="btn btn-info" onclick="registerStudent()">Register Student</button>
+					<button type="submit" class="btn btn-danger btn-custom" onclick="deleteStudent()">Delete</button>
+					<button type="submit" class="btn btn-success btn-custom" onclick="updateStudent()">Update</button>
+					<button type="submit" class="btn btn-info btn-custom" onclick="registerStudent()">Register Student</button>
 				</form>
-			
+	
 			</div>
 		</div>
 	</div>
@@ -72,25 +73,49 @@
 </body>
 <script>
 
-function registerStudent() {
-	alert("Register a new Student..!")
-	document.myForm.action = "register";
-	document.myForm.submit();
-
+function getSelectedRadioValue() {
+    let radios = document.getElementsByName("sid");
+    for (let radio of radios) {
+        if (radio.checked) {
+            return radio.value;
+        }
+    }
+    return null;
 }
 
-	function deleteStudent() {
-		alert("You are Deleting a Student..!");
-		document.myForm.action = "delete-student";
-		document.myForm.submit();
+function registerStudent() {
+    alert("Register a new Student..!");
+    document.myForm.action = "register";
+    document.myForm.submit();
+}
 
-	}
+function deleteStudent() {
 	
-	function updateStudent()
-	{
-		alert("You are Updating a Student..!");
-		document.myForm.action = "getStudentById";
-		document.myForm.submit();
-	}
+    let selectedValue = getSelectedRadioValue();
+    if (!selectedValue) {
+        alert("Please select a student before deleting.");
+        return false;
+    }
+    document.myForm.action = "delete-student";
+    document.myForm.submit();
+}
+
+function updateStudent() {
+    let selectedValue = getSelectedRadioValue();
+    if (!selectedValue) {
+        alert("Please select a student before updating.");
+        return false;
+    }
+    document.myForm.action = "getStudentById";
+    document.myForm.submit();
+}
+
 </script>
+<style>
+.btn-custom
+{
+width:150px;
+margin-left: 90px;
+}
+</style>
 </html>

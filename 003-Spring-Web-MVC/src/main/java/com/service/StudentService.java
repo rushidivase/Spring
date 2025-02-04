@@ -16,4 +16,8 @@ public interface StudentService {
 
 	List<Student> updateStudent(Student stu);
 
+	List<Student> searchData(String record);
+
+	List<Student> refreshPage();
+
 }

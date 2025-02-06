@@ -8,12 +8,17 @@ import org.springframework.stereotype.Service;
 
 import com.dao.StudentRepository;
 import com.model.Student;
+import com.model.User;
+import com.repo.UserRepository;
 
 @Service
 public class StudentServiceIMPL implements StudentService{
 
 	@Autowired
 	private StudentRepository repo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	public void saveStudent(Student stu) {
 		
@@ -24,7 +29,9 @@ public class StudentServiceIMPL implements StudentService{
 
 	public List<Student> loginCheck(String username, String password) {
 		
-		   if(username.equals("admin") && password.equals("1234"))
+		   User user = userRepo.findById(username).get();
+		
+		   if(username.equals(user.getUsername()) && password.equals(user.getPassword()))
 		   {
 			   return repo.findAll();
 		   }
@@ -65,4 +72,11 @@ public class StudentServiceIMPL implements StudentService{
 	public List<Student> refreshPage() {
 		return repo.findAll();	
 		}
+
+
+	@Override
+	public void registerUser(User user) {
+		
+		userRepo.save(user);
+	}
 }

@@ -21,7 +21,9 @@
 				<input type='password' class="form-control mt-2" placeholder="Enter Password" name="password">
 				<input type='submit'  class="btn btn-dark mt-2 w-100" value="Submit">
 				</form>
+				<a href="/signup-page">Not Registered..? Sign Up</a>
 			</div>
+			
 		</div>
 	</div>
 

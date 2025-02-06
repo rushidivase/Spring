@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import com.model.Student;
+import com.model.User;
 
 public interface StudentService {
 
@@ -19,5 +20,7 @@ public interface StudentService {
 	List<Student> searchData(String record);
 
 	List<Student> refreshPage();
+
+	void registerUser(User user);
 
 }

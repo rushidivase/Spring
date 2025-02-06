@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.Student;
+import com.model.User;
 import com.service.StudentService;
 
 @Controller
@@ -112,5 +113,19 @@ public class HomeController {
 		} else {
 			return "login";
 		}
+	}
+	
+	@RequestMapping("/signup-page")
+	public String signUpPage()
+	{
+		return "signup";
+	}
+	
+	@RequestMapping("/register-user")
+	public String registerUser(@ModelAttribute User user)
+	{
+		service.registerUser(user);
+		return "login";
+		
 	}
 }

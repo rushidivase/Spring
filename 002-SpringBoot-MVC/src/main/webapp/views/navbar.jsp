@@ -23,6 +23,8 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="record">
         <button class="btn btn-outline-dark" type="submit">Search</button>
       </form>
+      <a href="logout">Logout</a>
+      
     </div>
   </div>
 </nav>

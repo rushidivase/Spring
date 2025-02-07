@@ -2,6 +2,8 @@ package com.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,14 +38,17 @@ public class HomeController {
 	}
 
 	@RequestMapping("/login-check")
-	public String loginCheck(@RequestParam String username, @RequestParam String password, Model model) {
+	public String loginCheck(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
 		List<Student> sList = service.loginCheck(username, password);
+		
 		System.out.println(sList);
 
 		if (!sList.isEmpty()) {
+			session.setAttribute("username", username);
 			model.addAttribute("data", sList);
 			return "success";
 		} else {
+			
 			return "login";
 		}
 
@@ -128,4 +133,11 @@ public class HomeController {
 		return "login";
 		
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate(); // Destroys session
+	    return "redirect:/login"; // Redirect to login page
+	}
+
 }

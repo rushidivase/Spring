@@ -18,6 +18,11 @@
 
 
 	<%
+	if(session.getAttribute("username")==null)
+	{
+		response.sendRedirect("login.jsp");
+	}
+	
 		List<Student> sList = (List<Student>) request.getAttribute("data");
 	%>
 

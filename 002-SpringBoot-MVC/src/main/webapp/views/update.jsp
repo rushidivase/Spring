@@ -29,8 +29,8 @@
 					<input type='text' class="form-control mt-2" placeholder="Enter Id"
 						name="sid" value="<%=stu.getSid()%>" readonly> <input
 						type='text' class="form-control mt-2" placeholder="Enter Name"
-						name="name" value="<%=stu.getName()%>"> <input
-						type='text' class="form-control mt-2" placeholder="Enter Email Id"
+						name="name" value="<%=stu.getName()%>"> <input type='text'
+						class="form-control mt-2" placeholder="Enter Email Id"
 						name="email" value="<%=stu.getEmail()%>"> <input
 						type='text' class="form-control mt-2"
 						placeholder="Enter Mobile Number" name="mono"

@@ -19,13 +19,13 @@
 
 	<%
 		List<Product> pList = (List<Product>) request.getAttribute("data");
-	    //Long totalCount =(long) request.getAttribute("totalcount");
-	    //Long searchCount =(long) request.getAttribute("searchcount");
+	    Long totalCount =(long) request.getAttribute("totalcount");
+	    Long searchCount =(long) request.getAttribute("searchcount");
 	
 	%>
 
 	<div class="container mt-5">
-		<p>1 Record Found Over 100 Records</p>
+		<p><%=searchCount %> Record Found Over <%=totalCount %> Records</p>
 		<div class="row">
 			<div class="col text-center">
 			

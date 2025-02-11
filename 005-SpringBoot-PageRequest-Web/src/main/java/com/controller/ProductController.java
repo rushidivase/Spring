@@ -59,19 +59,16 @@ public class ProductController {
 	public String searchByName(@RequestParam String text, Model model)
 	{
 		List<Product> pList = service.getProductByName(text);
-		long count1 = 0;
-		for(Product p:pList)
-		{
-			count1++;
-		}
+		long count1 = pList.size();
+	
 	
 		long count = service.CountRecords();
 		
 		System.out.println(count+"----"+count1);
 		System.out.println(pList);
 		model.addAttribute("data", pList);
-		//model.addAttribute("totalcount", count);
-		//model.addAttribute("searchcount", count1);
+		model.addAttribute("totalcount", count);
+		model.addAttribute("searchcount", count1);
 		return "index";
 	}
 	

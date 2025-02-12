@@ -19,21 +19,31 @@
 
 	<%
 		List<Product> pList = (List<Product>) request.getAttribute("data");
-	    Long totalCount =(long) request.getAttribute("totalcount");
-	    Long searchCount =(long) request.getAttribute("searchcount");
-	
+	    Long totalCount = (long) request.getAttribute("totalcount");
+		boolean flag = (boolean) session.getAttribute("flag");
+		Long searchCount=0l;
+		if (flag) {
+			
+			searchCount = (long) request.getAttribute("searchcount");
+		}
 	%>
 
 	<div class="container mt-5">
-		<p><%=searchCount %> Record Found Over <%=totalCount %> Records</p>
+
+        <p>Total Count: <%=totalCount %></p>
+        
+        <%if(flag){%><p>Searched Count:<%=searchCount %><%} %>
+        
+        
+		<%--  <p><%=searchCount %> Record Found Over <%=totalCount %> Records</p>  --%>
 		<div class="row">
 			<div class="col text-center">
-			
-			<form action="search-by-name">
-			<input type="text" class="form-control" name="text">
-			<button class="btn btn-outline-info">Search</button>
-			</form>
-			
+
+				<form action="search-by-name">
+					<input type="text" class="form-control" name="text">
+					<button class="btn btn-outline-info">Search</button>
+				</form>
+
 				<h2>Product Table</h2>
 			</div>
 		</div>
@@ -41,7 +51,7 @@
 		<!-- Table Section -->
 		<div class="row">
 			<div class="col">
-			Sort: <a href='lowtohigh'>low to high</a>
+				Sort: <a href='lowtohigh'>low to high</a>
 				<table class="table table-bordered">
 					<thead>
 						<tr>

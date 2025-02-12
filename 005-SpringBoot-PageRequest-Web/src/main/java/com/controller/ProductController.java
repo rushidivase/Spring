@@ -1,8 +1,8 @@
 package com.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,17 @@ public class ProductController {
 	private ProductService service;
 	
 	@RequestMapping("/")
-	public String landingPage(Model model)
+	public String landingPage(Model model, HttpSession session)
 	{
 		List<Product> pList = service.getAllRecords();
 		System.out.println(pList);
+		long count = service.CountRecords();
 		model.addAttribute("data", pList);
+		model.addAttribute("totalcount", count);
+		session.setAttribute("flag", false);
+		
+		
+		
 		return "index";
 	}
 	
@@ -56,7 +62,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/search-by-name")
-	public String searchByName(@RequestParam String text, Model model)
+	public String searchByName(@RequestParam String text, Model model,HttpSession session)
 	{
 		List<Product> pList = service.getProductByName(text);
 		long count1 = pList.size();
@@ -69,6 +75,7 @@ public class ProductController {
 		model.addAttribute("data", pList);
 		model.addAttribute("totalcount", count);
 		model.addAttribute("searchcount", count1);
+		session.setAttribute("flag", true);
 		return "index";
 	}
 	

@@ -3,6 +3,8 @@ package com.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,41 +23,37 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-	
-//	@RequestMapping("/greet")
-//	public String greet()
-//	{
-//		return "Welcome to Restfull Webservices..!";
-//	}
-	
+
 	@PostMapping("/")
-	public Employee saveEmployee(@RequestBody Employee emp)
+	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee emp)
 	{
+
 		return employeeService.saveEmployee(emp);
 	}
 	
 	@GetMapping("/")
-	public List<Employee> getAllEmployees()
+	public ResponseEntity<List<Employee>> getAllEmployees()
 	{
 		return employeeService.getAllEmployees();
 	}
 	
 	@RequestMapping("/{eid}")
-	public Employee getEmployeeById(@PathVariable int eid)
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable int eid)
 	{
 		return employeeService.getEmployeeById(eid);
 	}
 	
 	@DeleteMapping("/{eid}")
-	public Employee deleteEmployeeById(@PathVariable int eid)
+	public ResponseEntity<Employee> deleteEmployeeById(@PathVariable int eid)
 	{
 		return employeeService.deleteEmployeeById(eid);
 	}
 	
 	@PutMapping("/")
-	public Employee updateEmployee(@RequestBody Employee emp)
+	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee emp)
 	{
 		return employeeService.updateEmployee(emp);
+		
 	}
 	
 	

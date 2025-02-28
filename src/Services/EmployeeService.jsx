@@ -1,5 +1,9 @@
 import axios from "axios";
 
-const BASE_REST_API = "http://localhost:8090/emp-service/"; 
+const BASE_REST_API = "http://localhost:8090/emp-service/";
 
-export const fetchEmployees = ()=> axios.get(BASE_REST_API).then(res=>res.data);
+export const fetchEmployees = () => axios.get(BASE_REST_API).then(res => res.data);
+
+export const insertEmployee = (employee) => axios.post(BASE_REST_API, employee);
+
+export const deleteEmployee = (eid) => axios.delete(`${BASE_REST_API}${eid}`);

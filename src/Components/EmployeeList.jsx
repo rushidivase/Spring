@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchEmployees } from '../Services/EmployeeService';
+import { deleteEmployee, fetchEmployees } from '../Services/EmployeeService';
+import { useNavigate } from 'react-router-dom';
 
 function EmployeeList() {
 
     const [employees, setEmployees] = useState([]);
+    const navigator = useNavigate();
 
     // const employees = [
     //     {
@@ -23,9 +25,23 @@ function EmployeeList() {
     //     },
     // ];
 
+
+    const handleDelete = (eid) => {
+        //console.log(eid);
+        const isConfirmed = window.confirm("Do You Want to delete Employee..!");
+        if(isConfirmed)
+        {
+            deleteEmployee(eid).then((response) => {
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+    }
+
     useEffect(() => {
         getAllEmployees();
-    }, [])
+    }, [handleDelete])
 
     const getAllEmployees = () => {
 
@@ -35,6 +51,7 @@ function EmployeeList() {
             console.log(error);
         })
     }
+
 
 
     return (
@@ -48,11 +65,12 @@ function EmployeeList() {
                         <th scope="col">Age</th>
                         <th scope="col">Mobile Number</th>
                         <th scope="col">Salary</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {employees.map((employee) => (
-                        <tr>
+                        <tr key={employee.eid}>
 
                             <td>{employee.eid}</td>
 
@@ -63,10 +81,14 @@ function EmployeeList() {
                             <td>{employee.mono}</td>
 
                             <td>{employee.salary}</td>
+                            <td>
+                                <button onClick={() => { handleDelete(employee.eid) }} className='btn btn-outline-danger'>Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <button className='btn btn-success w-100' onClick={() => { navigator("/add-emp") }}>Add New Employee</button>
         </div>
     );
 }

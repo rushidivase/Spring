@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { insertEmployee } from '../Services/EmployeeService';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { getEmployeeById, insertEmployee, updateEmployee } from '../Services/EmployeeService';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function AddEmployeeComponent() {
 
@@ -10,25 +10,64 @@ function AddEmployeeComponent() {
     const [mono, setMono] = useState();
     const [salary, setSalary] = useState();
 
+    const { id } = useParams();
+
     const navigator = useNavigate();
 
-    function saveEmployee() {
-        const employee = {eid, ename, age, mono, salary};
-        //console.log(employee);
-        insertEmployee(employee).then((response)=>{
-            console.log(response.data);
-        }).catch((error)=>{
-            console.log(error);
-        })
+    useEffect(() => {
+        handleEmployee();
+    }, []);
 
-      navigator("/");
+    const handleEmployee = () => {
+        getEmployeeById(id).then((response) => {
+            console.log(response.data)
+            setEid(response.data.eid);
+            setEname(response.data.ename);
+            setAge(response.data.age);
+            setMono(response.data.mono);
+            setSalary(response.data.salary);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    function saveOrUpdateEmployee() {
+        const employee = { eid, ename, age, mono, salary };
+        //console.log(employee);
+
+        if (id) {
+            updateEmployee(employee).then((res) => {
+                console.log(res);
+            }).catch((e) => {
+                console.log(e);
+            })
+        }
+        else {
+            insertEmployee(employee).then((response) => {
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+
+
+        navigator("/");
+    }
+
+    function pageTitle() {
+        if (id) {
+            return <h2 className='text-center display-6 mb-3'>Update Employee</h2>
+        }
+        else {
+            return <h2 className='text-center display-6 mb-3'>Add Employee</h2>
+        }
     }
 
     return (
         <div className='container'>
             <div className='row justify-content-center'>
                 <div className='col-5 border shadow p-3 mt-5'>
-                    <h2 className='text-center display-6 mb-3'>Add Employee</h2>
+                    {pageTitle()}
                     <input type='text' className='form-control mb-2' placeholder='Enter Employee Id'
                         value={eid} onChange={(e) => { setEid(e.target.value) }} />
 
@@ -44,7 +83,7 @@ function AddEmployeeComponent() {
                     <input type='text' className='form-control mb-2' placeholder='Enter Salary'
                         value={salary} onChange={(e) => { setSalary(e.target.value) }} />
 
-                    <button onClick={saveEmployee} type='submit' className='btn btn-info w-100'>Submit</button>
+                    <button onClick={saveOrUpdateEmployee} type='submit' className='btn btn-info w-100'>Submit</button>
                 </div>
             </div>
         </div>

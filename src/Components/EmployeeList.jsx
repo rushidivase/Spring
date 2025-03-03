@@ -39,6 +39,10 @@ function EmployeeList() {
         }
     }
 
+    const handleUpdate = (eid) =>{
+      navigator(`update-emp/${eid}`);
+    }
+
     useEffect(() => {
         getAllEmployees();
     }, [handleDelete])
@@ -83,6 +87,7 @@ function EmployeeList() {
                             <td>{employee.salary}</td>
                             <td>
                                 <button onClick={() => { handleDelete(employee.eid) }} className='btn btn-outline-danger'>Delete</button>
+                                <button onClick={() => { handleUpdate(employee.eid) }} className='btn btn-outline-info'>Update</button>
                             </td>
                         </tr>
                     ))}

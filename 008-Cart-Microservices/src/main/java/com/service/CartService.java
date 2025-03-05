@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.dto.CartDto;
 import com.model.Cart;
+import com.proxy.ProductServiceProxy;
 import com.repo.CartRepository;
 
 @Service
@@ -18,6 +19,9 @@ public class CartService {
 	@Autowired
 	private CartRepository repo;
 
+	@Autowired
+	private ProductServiceProxy proxy;
+	
 	public Cart getCartInfo(int cartId) {
 		
 		return repo.findById(cartId).get();
@@ -41,7 +45,30 @@ public class CartService {
 		
 		//Diff bet URI and URL
 	}
+
+	public CartDto getAllCartInfoWithProxy(int cartId) {
+		Cart cart = repo.findById(cartId).get();
+		
+		CartDto cartDto = proxy.retrieveProductData(cart.getProductId());
+		
+		return new CartDto(cart.getCartId(), cart.getProductId(), cartDto.getProductName(), cartDto.getProductPrice());
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

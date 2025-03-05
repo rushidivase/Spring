@@ -29,5 +29,11 @@ public class CartController {
 		return  cartService.getAllCartInfo(cartId);
 	}
 	
+	@GetMapping("/dto-proxy/{cartId}")
+	public CartDto getAllCartInfoWithProxy(@PathVariable int cartId)
+	{
+		return  cartService.getAllCartInfoWithProxy(cartId);
+	}
+	
 	
 }
